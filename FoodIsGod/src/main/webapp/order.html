@@ -1,163 +1,209 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/foot.css">
-<title>点单</title>
-</head>
-<body>	
-	<div class="body">
-		<img alt="" src="images/图片背景.png">
-	</div>
-	
-	<!-- 左侧导航栏 -->
-	<div id="navbar-example" class="navbar navbar-default circle-navbar" role="navigation">
-		<ul class="nav navbar-nav category circle-nav">
-			<li class="order-li">
-				<a href="#hot" class="order-li-a">
-				<span class="text-center order-a-font">热销榜</span>
-				</a>											
-			</li>				
-		</ul>
-	</div>
-		
-	<!-- 桌号 -->
-	<div class="table">
-		<span class="table-font-num">桌号</span>
-		<span class="table-font">xxxx</span>
-	</div>
-		
-	<!-- 榜单 -->
-	<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example">
-		<div class="order-category">
-			<span class="order-font" id="hot">热销</span>	
-					
-			<!-- 菜品 -->
-			<div class="order-dishes">
-				<img alt="" src="images/首页.png" class="order-dishes-img">				
-				<div class="order-dishes-price">
-					<label class="order-label">xxx</label>
-					<span class="dishes-price">￥00.00</span>
-				</div>
-				<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="demo(1)">
-					选规格
-				</button>										
-			</div>
-			
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/foot.css">
+		<title>点单</title>
+	</head>
+	<body>
+		<div class="body">
+			<img alt="" src="images/图片背景.png">
 		</div>
-	</div>
-	
-	<!-- 模态框 -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">							
-		<div class="dishes-detail-box">	
-			<div class="modal-header">
-				<button type="button" class="close order-label" data-dismiss="modal" aria-hidden="true">×</button>
-				<img alt="" src="images/首页.png">
-				<h4 class="order-label" id="demo">xxx</h4>
-			</div>
-			<div class="modal-center">
-				<span class="order-font">描述</span>
-			</div>
-			<div class="modal-footer">
-				<div class="modal-account">
-					<span class="order-price modal-account-price">￥00.00</span>
-					<button class="moder-dec order-price" onclick="dec()">-</button>
-					<span class="moder-num order-price" id="num">1</span>
-					<button class="moder-add moder-add-font" onclick="add()">+</button>
-				</div>
-				<button type="button" class="btn-block moder-join btn-lg moder-font" data-dismiss="modal" onclick="join()">加入购物车</button>
-			</div>
-		</div>			
-	</div>
-	
-	<!-- 购物车 -->
-	<div class="order-cart-box">	
-		<div class="cart-circle">
-			<a href="#" class="circle-a">
-				<img alt="" src="images/购物车.png" class="circle-img center-block">
-			</a>				
+
+		<!-- 左侧导航栏 -->
+		<div id="navbar-example" class="navbar navbar-default circle-navbar" role="navigation">
+			<ul class="nav navbar-nav category circle-nav" id="left_navbar">
+				
+				<!-- 分类 -->
+				<li class="order-li">
+					<a href="#hot" class="order-li-a">
+						<span class="text-center order-a-font">热销榜</span>
+					</a>
+				</li>
+				
+			</ul>
 		</div>
-		<div class="circle-add circlr-font"><span id="n">1</span></div>
-		<span class="order-price">￥00.00</span>
-		<a class="circle-button text-center" href="confirm.html">结算</a>
-	</div>	
-</body>
+
+		<!-- 桌号 -->
+		<div class="table">
+			<span class="table-font-num">桌号</span>
+			<span class="table-font" id="table_Numer"></span>
+		</div>
+
+		<!-- 榜单 -->
+		<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example">
+			<div class="order-category">
+				<span class="order-font" id="hot">热销</span>
+
+				<!-- 菜品 -->
+				<div class="order-dishes">
+					<img alt="" src="images/首页.png" class="order-dishes-img">
+					<div class="order-dishes-price">
+						<label class="order-label">xxx</label>
+						<span class="dishes-price">￥00.00</span>
+					</div>
+					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="demo(1)">
+						选规格
+					</button>
+				</div>
+				
+				
+
+			</div>
+		</div>
+
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="dishes-detail-box">
+				<div class="modal-header">
+					<button type="button" class="close order-label" data-dismiss="modal" aria-hidden="true">X</button>
+					<img alt="" src="images/首页.png">
+					<h4 class="order-label" id="dishName">xxx</h4>
+				</div>
+				<div class="modal-center">
+					<span class="order-font" id="dishDesc">描述</span>
+				</div>
+				<div class="modal-footer">
+					<div class="modal-account">
+						<span class="order-price modal-account-price" id="dishPrice">￥00.00</span>
+						<button class="moder-dec order-price" onclick="dec()">-</button>
+						<span class="moder-num order-price" id="num">1</span>
+						<button class="moder-add moder-add-font" onclick="add()">+</button>
+					</div>
+					<button type="button" class="btn-block moder-join btn-lg moder-font" data-dismiss="modal"
+						onclick="join()">加入购物车</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- 购物车 -->
+		<div class="order-cart-box">
+			<div class="cart-circle">
+				<a href="confirm.html" class="circle-a">
+					<img alt="" src="images/购物车.png" class="circle-img center-block">
+				</a>
+			</div>
+			<div class="circle-add circlr-font"><span id="allDishNum">0</span></div>
+			<span class="order-price">￥00.00</span>
+			<a class="circle-button text-center" href="confirm.html">结算</a>
+		</div>
+	</body>
 
 	<!-- 底部导航栏 -->
-	
-<footer>
-	<nav class="navbar-fixed-bottom" role="navigation">
-    <div class="container-fluid topic"style="background:#cbd7e3">
-	    <div>
-	    	<a href="home.html" class="foot-a">
-	        <img alt="首页" src="images/首页.png" class="foot-img center-block">
-	        <span class="text-center foot-span">首页</span>
-	        </a>
-	    </div>
-	    <div>
-	    	<a href="order.html" class="foot-a">
-	        <img alt="点单" src="images/商品1.png" class="foot-img center-block">
-	        <span class="text-center foot-span">点单</span>
-	        </a>
-	    </div>
-	    <div>
-	    	<a href="po.html" class="foot-a">
-	        <img alt="订单" src="images/订单.png" class="foot-img center-block">
-	        <span class="text-center foot-span">订单</span>
-	        </a>
-	    </div>
-	    <div>
-	    	<a href="my.html" class="foot-a">
-	        <img alt="我的" src="images/我的.png" class="foot-img center-block">
-	        <span class="text-center foot-span">我的</span>
-	        </a>
-	    </div>
-	</div>	            	            	
-</nav>
-</footer>
-<script>
-	function dec(	){
-		var num = document.getElementById("num");
-		b = parseInt(num.innerHTML);
-		if(b==1){
+
+	<footer>
+		<nav class="navbar-fixed-bottom" role="navigation">
+			<div class="container-fluid topic" style="background:#cbd7e3">
+				<div>
+					<a href="home.html" class="foot-a">
+						<img alt="首页" src="images/首页.png" class="foot-img center-block">
+						<span class="text-center foot-span">首页</span>
+					</a>
+				</div>
+				<div>
+					<a href="order.html" class="foot-a">
+						<img alt="点单" src="images/商品1.png" class="foot-img center-block">
+						<span class="text-center foot-span">点单</span>
+					</a>
+				</div>
+				<div>
+					<a href="po.html" class="foot-a">
+						<img alt="订单" src="images/订单.png" class="foot-img center-block">
+						<span class="text-center foot-span">订单</span>
+					</a>
+				</div>
+				<div>
+					<a href="my.html" class="foot-a">
+						<img alt="我的" src="images/我的.png" class="foot-img center-block">
+						<span class="text-center foot-span">我的</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+	</footer>
+	<script>
+		// 减少数量
+		function dec() {
+			var num = document.getElementById("num");
+			b = parseInt(num.innerHTML);
+			if (b == 1) {
+				num.innerHTML = 1;
+			} else {
+				num.innerHTML = b - 1;
+			}
+		}
+
+		// 增加数量
+		function add() {
+			var a = document.getElementById("num");
+			b = parseInt(a.innerHTML) + 1;
+			a.innerHTML = b;
+		}
+
+		// 加入购物车
+		function join() {
+			var num = document.getElementById("num");
+			b = parseInt(num.innerHTML);
+			var n = document.getElementById("allDishNum");
+			a = parseInt(n.innerHTML);
+			n.innerHTML = a + b;
 			num.innerHTML = 1;
 		}
-		else{
-			num.innerHTML = b-1;
-		}
-	}
-	function add(){
-			var a = document.getElementById("num");
-			b = parseInt(a.innerHTML)+1;
-			a.innerHTML = b;
-	}
-	function join(){
-		var num = document.getElementById("num");
-		b = parseInt(num.innerHTML);
-		var n = document.getElementById("n");
-		a = parseInt(n.innerHTML);
-		n.innerHTML = a+b;
-		num.innerHTML = 1;
-	}
-	function demo(){
-		var n = document.getElementById("demo");
-		n.innerHTML = 1;
-	}
-	function getQueryString(name) {
-		var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-		var r = window.location.search.substr(1).match(reg);
-		if (r != null) {
-			return unescape(r[2]);
-		}
-		return null;
-	}
-	var i = document.getElementById("id");
-	i.innerText=getQueryString("id");
 
-	var l = document.getElementById("link");
-	l.href="http://114.55.244.19?id="+getQueryString("id");
-</script>
+		// 修改模态框信息
+		function demo(dishNum) {
+			var n = document.getElementById("demo");
+			n.innerHTML = 1;
+			
+			
+		}
+
+		function getQueryString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return unescape(r[2]);
+			}
+			return null;
+		}
+
+		var tbm = getQueryString("tableNumer");
+		if (tbm != null){
+			writeTableNumber(tbm);
+			writeStorage(tbm);
+		}else{
+			writeTableNumber(readStorage());
+		}
+		
+		function writeStorage(tbm){
+			if (typeof(Storage) !== "undefined") {
+				if(tbm==""){
+					sessionStorage.tableNumer = "未知";
+				}else{
+					sessionStorage.tableNumer = tbm;
+				}
+			}
+		}
+		
+		function readStorage(){
+			if (typeof(Storage) !== "undefined") {
+				if (sessionStorage.tableNumer){
+					return sessionStorage.tableNumer;
+				}
+				return "未知";
+			}
+		}
+		
+		function writeTableNumber(tbm){
+			document.getElementById("table_Numer").innerText = tbm;
+		}
+		
+		function insertLeftNav(){
+			
+		}
+	</script>
 </html>
