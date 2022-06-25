@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/confirm.css">
+<title>确认订单</title>
+</head>
+<body>
+<!-- 返回 -->
+	<div class="head navbar-fixed-top">
+		<a href="order.html">
+			<img src="images/返回.png" class="confirm-img">
+		</a>
+		<span class="confirm-head-font">确认订单</span>	
+	</div>
+<!-- 商品列表 -->
+	<div class="imformation">
+		<div class="imformation-location">
+			<span class="information-font">商品列表</span>
+		</div>
+		<!-- 商品 -->
+		<div class="commodity">
+			<img alt="" src="images/首页.png" class="commodity-img">
+			<span class="cmmodity-font">xxx</span>
+			<div class="price">
+				<span class="information-price-font">￥00.00</span>
+				<span class="cmmodity-font-num">x1</span>
+			</div>
+		</div>
+		<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"/>
+		<!-- 总计 -->
+		<div class="out">
+			<span class="out-font">共x件商品，小计￥00.00</span>
+		</div>
+	</div>
+<!-- 备注 -->
+	<div class="remark">
+		<a href="#" class="remark-a" data-toggle="modal" data-target="#remark">
+			<span class="information-price-font">备注</span>
+			<span class="out-font" id="n">对商家的要求</span>
+			<img src="images/返回2.png" class="remark-img">
+		</a>
+	</div>
+	<!-- 弹窗 -->
+	<div class="modal fade" id="remark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">	
+		<div class="remark-box">
+			<textarea rows="10" cols="50" class="remark-content" id="content"></textarea>
+			<button class="remark-button" onclick="remark()" data-dismiss="modal">完成</button>
+		</div>
+	</div>
+<!-- 支付方式 -->
+	<div class="payment"></div>
+<!-- 支付 -->
+	<div class="foot navbar-fixed-bottom">
+		<span class="foot-font">￥00.00</span>
+		<button class="foot-button">
+				立即支付
+		</button>
+	</div>
+</body>
+<script>
+	function remark(){
+		var remark = document.getElementById("n");
+		var content = document.getElementById("content")
+		remark.innerHTML = content.value;
+	}
+</script>
+</html>
