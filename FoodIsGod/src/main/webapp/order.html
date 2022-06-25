@@ -6,6 +6,8 @@
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="css/foot.css">
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 		<title>点单</title>
 	</head>
 	<body>
@@ -16,14 +18,14 @@
 		<!-- 左侧导航栏 -->
 		<div id="navbar-example" class="navbar navbar-default circle-navbar" role="navigation">
 			<ul class="nav navbar-nav category circle-nav" id="left_navbar">
-				
+
 				<!-- 分类 -->
 				<li class="order-li">
 					<a href="#hot" class="order-li-a">
 						<span class="text-center order-a-font">热销榜</span>
 					</a>
 				</li>
-				
+
 			</ul>
 		</div>
 
@@ -34,8 +36,9 @@
 		</div>
 
 		<!-- 榜单 -->
-		<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example">
-			<div class="order-category">
+		<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example" id="dish_category_content">
+
+			<div class="order-category" id="dish_category">
 				<span class="order-font" id="hot">热销</span>
 
 				<!-- 菜品 -->
@@ -49,8 +52,8 @@
 						选规格
 					</button>
 				</div>
-				
-				
+
+
 
 			</div>
 		</div>
@@ -89,7 +92,7 @@
 			</div>
 			<div class="circle-add circlr-font"><span id="allDishNum">0</span></div>
 			<span class="order-price">￥00.00</span>
-			<a class="circle-button text-center" href="confirm.html">结算</a>
+			<a class="circle-button text-center" onclick="submitShoppingCart()">结算</a>
 		</div>
 	</body>
 
@@ -125,7 +128,118 @@
 			</div>
 		</nav>
 	</footer>
+
 	<script>
+		//全局变量
+		//json数组
+		//样例数据
+		//菜品分类列表
+		var dishSortList = [{
+			"sortId": 1,
+			"sortName": "热销"
+		}, {
+			"sortId": 2,
+			"sortName": "爆款"
+		}, {
+			"sortId": 3,
+			"sortName": "其他"
+		}];
+		// 所有菜品列表
+		var allDIsh = [{
+			"mealsId": 1001,
+			"sortId": 1,
+			"mealsName": "牛肉1",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味牛肉",
+			"mealsPicture": "我的.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1002,
+			"sortId": 2,
+			"mealsName": "果蔬2",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "首页.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1003,
+			"sortId": 3,
+			"mealsName": "果蔬3",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "首页.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1004,
+			"sortId": 1,
+			"mealsName": "果蔬1",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "首页.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1005,
+			"sortId": 2,
+			"mealsName": "果蔬2",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "首页.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1006,
+			"sortId": 3,
+			"mealsName": "果蔬3",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "首页.png",
+			"mealsSales": 50
+		}];
+		// 购物车
+		var shoppingCarts = [];
+
+		// function createDishSort(sortId,sortName) {
+		//     var o = new Object();
+		//     o.sortId = sortId;
+		//     o.sortName = sortName;
+		//     return o;
+		// }
+
+
+
+		// 构造函数
+		// 类别
+		function dishSort(sortId, sortName) {
+			this.sortId = sortId;
+			this.sortName = sortName;
+		}
+		// 构造函数
+		// 购物车
+		function shoppingCart(userId, mealsId, mealsNum) {
+			this.userId = userId;
+			this.mealsId = mealsId;
+			this.mealsNum = mealsNum;
+		}
+		// 构造函数
+		// 菜品
+		function dish(mealsId, sortId, mealsName,
+			mealsPrice, mealsRepresent, mealsPicture, mealsSales) {
+			this.mealsId = mealsId;
+			this.sortId = sortId;
+			this.mealsName = mealsName;
+			this.mealsPrice = mealsPrice;
+			this.mealsRepresent = mealsRepresent;
+			this.mealsPicture = mealsPicture;
+			this.mealsSales = mealsSales;
+		}
+
+		var spc1 = new shoppingCart(123, 1001, 2);
+		var spc2 = new shoppingCart(123, 1002, 1);
+		var spc3 = new shoppingCart(123, 1003, 2);
+		shoppingCarts.push(spc1);
+		shoppingCarts.push(spc2);
+		shoppingCarts.push(spc3);
+		console.log(shoppingCarts);
+
 		// 减少数量
 		function dec() {
 			var num = document.getElementById("num");
@@ -135,6 +249,24 @@
 			} else {
 				num.innerHTML = b - 1;
 			}
+		}
+
+		// 提交购物车
+		function submitShoppingCart() {
+			// ajax请求获取分类数据
+			axios.post('/shoppingCart', shoppingCarts
+					
+			)
+				.then(function(response) {
+					if (response.code == 100) {
+						dishSortList = response.extend;
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
 		}
 
 		// 增加数量
@@ -158,52 +290,138 @@
 		function demo(dishNum) {
 			var n = document.getElementById("demo");
 			n.innerHTML = 1;
-			
-			
+
+
 		}
 
+
+		// 桌号相关操作开始 ////////////////
+
+		//获取URL里面的名为name的参数
 		function getQueryString(name) {
 			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 			var r = window.location.search.substr(1).match(reg);
 			if (r != null) {
 				return unescape(r[2]);
 			}
+			//URL里无此参数，返回空
 			return null;
 		}
 
+		//tbm桌号
 		var tbm = getQueryString("tableNumer");
-		if (tbm != null){
+		if (tbm != null) {
 			writeTableNumber(tbm);
 			writeStorage(tbm);
-		}else{
+		} else { // URL里没有桌号，去浏览器缓存读取
 			writeTableNumber(readStorage());
 		}
-		
-		function writeStorage(tbm){
+
+		//桌号写入浏览器缓存
+		function writeStorage(tbm) {
 			if (typeof(Storage) !== "undefined") {
-				if(tbm==""){
+				if (tbm == "") {
 					sessionStorage.tableNumer = "未知";
-				}else{
+				} else {
 					sessionStorage.tableNumer = tbm;
 				}
 			}
 		}
-		
-		function readStorage(){
+
+		//读浏览器缓存中的桌号
+		function readStorage() {
 			if (typeof(Storage) !== "undefined") {
-				if (sessionStorage.tableNumer){
+				if (sessionStorage.tableNumer) {
 					return sessionStorage.tableNumer;
 				}
 				return "未知";
 			}
 		}
-		
-		function writeTableNumber(tbm){
+
+		//打印桌号
+		function writeTableNumber(tbm) {
 			document.getElementById("table_Numer").innerText = tbm;
 		}
-		
-		function insertLeftNav(){
-			
+		// 桌号相关操作结束 /////////////////
+
+
+		// 插入分类信息
+		function insertLeftNav() {
+			var target = document.getElementById("left_navbar");
+			var dish_category_content = document.getElementById("dish_category_content");
+			// 请求到的json渲染到页面上
+
+			for (var i = 0; i < dishSortList.length; i++) {
+				var temp = "<li class='order-li'>" +
+					"<a href='#hot" + dishSortList[i].sortId + "' class='order-li-a'>" +
+					"<span class='text-center order-a-font'>" + dishSortList[i].sortName + "</span></a></li>";
+
+				target.innerHTML += temp;
+
+				var temp2 = "<div class='order-category' id='dish_category" + dishSortList[i].sortId + "'>" +
+					"<span class='order-font' id='hot'>" + dishSortList[i].sortName + "</span></div>";
+
+				dish_category_content.innerHTML += temp2;
+			}
+		}
+
+		insertLeftNav();
+
+		// 加载菜品类别
+		function loadLeftNav() {
+			// ajax请求获取分类数据
+			axios.post('/meals' ,{
+				"sort" : 1
+			})
+				.then(function(response) {
+					if (response.code == 100) {
+						dishSortList = response.data.extend;
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+
+loadLeftNav();
+loadDish();
+		// 加载菜品
+		function loadDish() {
+			// ajax请求获取菜品数据
+			axios.post('/sort' , {
+				"mealsId": 1
+			})
+				.then(function(response) {
+					if (response.code == 100) {
+						allDIsh = response.data.extend;
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+		insertDish();
+		// 插入菜品信息
+		function insertDish() {
+			// 请求到的json渲染到页面上
+
+			for (var i = 0; i < allDIsh.length; i++) {
+				var target = document.getElementById("dish_category" + allDIsh[i].sortId);
+
+				var temp = "<div class='order-dishes'><img alt='' src='images/" + allDIsh[i].mealsPicture +
+					"' class='order-dishes-img'>" +
+					"<div class='order-dishes-price'><label class='order-label'>" + allDIsh[i].mealsName + "</label>" +
+					"<span class='dishes-price'> ￥" + allDIsh[i].mealsPrice + ".00</span>" +
+					"</div><button class='order-button' data-toggle='modal' data-target='#myModal' onclick='demo(" +
+					allDIsh[i].mealsId + ")'>选规格</button></div>";
+
+				target.innerHTML += temp;
+			}
+
 		}
 	</script>
 </html>
