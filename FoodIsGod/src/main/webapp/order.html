@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="css/foot.css">
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-		<title>点单</title>
-	</head>
-	<body>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/foot.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<title>点单</title>
+<style type="text/css">
+</style>
+</head>
+<body>
 		<div class="body">
 			<img alt="" src="images/图片背景.png">
 		</div>
@@ -20,11 +21,6 @@
 			<ul class="nav navbar-nav category circle-nav" id="left_navbar">
 
 				<!-- 分类 -->
-				<li class="order-li">
-					<a href="#hot" class="order-li-a">
-						<span class="text-center order-a-font">热销榜</span>
-					</a>
-				</li>
 
 			</ul>
 		</div>
@@ -36,28 +32,8 @@
 		</div>
 
 		<!-- 榜单 -->
-		<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example" id="dish_category_content">
-
-			<div class="order-category" id="dish_category">
-				<span class="order-font" id="hot">热销</span>
-
-				<!-- 菜品 -->
-				<div class="order-dishes">
-					<img alt="" src="images/首页.png" class="order-dishes-img">
-					<div class="order-dishes-price">
-						<label class="order-label">xxx</label>
-						<span class="dishes-price">￥00.00</span>
-					</div>
-					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="demo(1)">
-						选规格
-					</button>
-				</div>
-
-
-
+			<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example" id="dish_category_content">
 			</div>
-		</div>
-
 		<!-- 模态框 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 			aria-hidden="true">
@@ -421,7 +397,7 @@
 
 				target.innerHTML += temp;
 			}
-
+			
 		}
 	</script>
 </html>
