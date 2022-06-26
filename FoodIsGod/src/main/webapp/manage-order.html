@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/foot.css">
+<title>菜品管理</title>
+<style type="text/css">
+.order-button{
+height:60px;
+margin-top:25px;
+}
+form{
+	display:flex;
+	flex-direction: column
+}
+.form-font{
+	font-size:40px;
+}
+input{
+	margin-left:100px;
+	width:400px;
+	height:80px;
+    background: #f9f8f8;
+	border:none;
+	font-size:56px;
+}
+textarea{
+	margin-left:100px;
+	width:400px;
+	height:400px;
+	background: #f9f8f8;
+	border:none;
+	font-size:56px;
+}
+.dishes-detail-box{
+	height:1050px;
+}
+</style>
+</head>
+<body>	
+	<!-- 左侧导航栏 -->
+	<div id="navbar-example" class="navbar navbar-default circle-navbar" role="navigation">
+		<ul class="nav navbar-nav category circle-nav">
+			<li class="order-li">
+				<a href="#hot" class="order-li-a">
+				<span class="text-center order-a-font">热销榜</span>
+				</a>											
+			</li>				
+		</ul>
+	</div>
+	<!-- 榜单 -->
+	<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example">
+		<div class="order-category">
+			<span class="order-font" id="hot">热销</span>	
+					
+			<!-- 菜品 -->
+			<div class="order-dishes">
+				<img alt="" src="images/首页.png" class="order-dishes-img">				
+				<div class="order-dishes-price">
+					<label class="order-label" id="dish-name">xxx</label>
+					<span class="dishes-price" id="dish-price">￥00.00</span>
+				</div>
+				<div class="order-dishes-price">
+					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="delete1()">删除</button>
+					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="update()">修改</button>	
+				</div>										
+			</div>
+			
+		</div>
+	</div>
+	
+	<!-- 模态框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">							
+		<div class="dishes-detail-box">	
+			<div class="modal-header">
+				<button type="button" class="close order-label" data-dismiss="modal" aria-hidden="true">×</button>
+				<button><img alt="" src="images/上传.png"></button>
+				<span class="form-font ">点击更改</span>
+			</div>			
+				<form action="manage-order.html">
+					<span class="form-font text-center">名称</span><input id="name">
+					<span class="form-font text-center">价格</span><input id="price">
+					<span class="form-font text-center">描述</span>
+					<textarea rows="10" cols="50" id="remark"></textarea>
+				</form>
+			<div class="modal-footer">
+				<button type="submit" class="btn-block moder-join btn-lg moder-font" data-dismiss="modal">确认</button>
+			</div>
+		</div>			
+	</div>
+	<!-- 购物车 -->
+	<div class="order-cart-box">	
+		<a class="circle-button text-center" onclick="add()">添加</a>
+	</div>
+</body>
+
+	<!-- 底部导航栏 -->
+	
+<footer>
+	<nav class="navbar-fixed-bottom" role="navigation">
+    <div class="container-fluid topic"style="background:#cbd7e3">
+	    <div>
+	    	<a href="order.html" class="foot-a">
+	        <img alt="点单" src="images/应用1.png" class="foot-img center-block">
+	        <span class="text-center foot-span">管理</span>
+	        </a>
+	    </div>
+	    <div>
+	    	<a href="po.html" class="foot-a">
+	        <img alt="订单" src="images/订单.png" class="foot-img center-block">
+	        <span class="text-center foot-span">订单</span>
+	        </a>
+	    </div>
+	    <div>
+	    	<a href="my.html" class="foot-a">
+	        <img alt="我的" src="images/我的.png" class="foot-img center-block">
+	        <span class="text-center foot-span">我的</span>
+	        </a>
+	    </div>
+	</div>	            	            	
+</nav>
+</footer>
+<script>
+	function delete1(){
+		
+	}
+	function update(){
+		var name = document.getElementById("dish-name");
+		var price = document.getElementById("dish-price");
+		document.getElementById("name").value = name.innerHTML;
+		document.getElementById("price").value = price.innerHTML;
+	}
+</script>
+</html>
