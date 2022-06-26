@@ -58,11 +58,67 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<!-- 物品栏 -->
+		<div class="cart-box" id="111" style="display:none">
+			<div class="cart-box-head">
+				<span class="cart-box-font">购物车</span>
+				<button class="cart-box-button">清空</button>
+			</div>
+			<div class='order-dishes'>
+				<img alt='' src='images/首页.png' class='order-dishes-img'>
+				<div class='order-dishes-price'>
+					<label class='order-label'>xxx</label>
+					<span class='dishes-price'>￥00.00</span>
+				</div>
+				<div class="cart-box-num">
+					<button class="moder-dec order-price" onclick="dec()">-</button>
+					<span class="moder-num order-price" id="num">1</span>
+					<button class="moder-add moder-add-font" onclick="add()">+</button>
+				</div>
+			</div>
+			<div class='order-dishes'>
+				<img alt='' src='images/首页.png' class='order-dishes-img'>
+				<div class='order-dishes-price'>
+					<label class='order-label'>xxx</label>
+					<span class='dishes-price'>￥00.00</span>
+				</div>
+				<div class="cart-box-num">
+					<button class="moder-dec order-price" onclick="dec()">-</button>
+					<span class="moder-num order-price" id="num">1</span>
+					<button class="moder-add moder-add-font" onclick="add()">+</button>
+				</div>
+			</div>
+			<div class='order-dishes'>
+				<img alt='' src='images/首页.png' class='order-dishes-img'>
+				<div class='order-dishes-price'>
+					<label class='order-label'>xxx</label>
+					<span class='dishes-price'>￥00.00</span>
+				</div>
+				<div class="cart-box-num">
+					<button class="moder-dec order-price" onclick="dec()">-</button>
+					<span class="moder-num order-price" id="num">1</span>
+					<button class="moder-add moder-add-font" onclick="add()">+</button>
+				</div>
+			</div>
+			<div class='order-dishes'>
+				<img alt='' src='images/首页.png' class='order-dishes-img'>
+				<div class='order-dishes-price'>
+					<label class='order-label'>xxx</label>
+					<span class='dishes-price'>￥00.00</span>
+				</div>
+				<div class="cart-box-num">
+					<button class="moder-dec order-price" onclick="dec()">-</button>
+					<span class="moder-num order-price" id="num">1</span>
+					<button class="moder-add moder-add-font" onclick="add()">+</button>
+				</div>
+			</div>
+		</div>
+	
 		<!-- 购物车 -->
 		<div class="order-cart-box">
 			<div class="cart-circle">
-				<a href="confirm.html" class="circle-a">
+				<a  class="circle-a" onclick="test()">
 					<img alt="" src="images/购物车.png" class="circle-img center-block">
 				</a>
 			</div>
@@ -73,7 +129,6 @@
 	</body>
 
 	<!-- 底部导航栏 -->
-
 	<footer>
 		<nav class="navbar-fixed-bottom" role="navigation">
 			<div class="container-fluid topic" style="background:#cbd7e3">
@@ -148,7 +203,7 @@
 		}, {
 			"mealsId": 1004,
 			"sortId": 1,
-			"mealsName": "果蔬1",
+			"mealsName": "果蔬fgggggg1",
 			"mealsPrice": 25,
 			"mealsRepresent": "好吃美味果蔬",
 			"mealsPicture": "首页.png",
@@ -398,6 +453,14 @@ loadDish();
 				target.innerHTML += temp;
 			}
 			
+		}
+		function test(){
+			var display = document.getElementById("111").style.display;
+			if(display=="none"){
+				document.getElementById("111").style.display="block";
+			}else{
+				document.getElementById("111").style.display="none";
+			}
 		}
 	</script>
 </html>
