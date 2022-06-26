@@ -83,10 +83,11 @@
 			margin-top:40px;
 			float:right;
 			width:77.5%;
-			height:2000px;
+			height:60%;
 			overflow:auto; 
 			position:fixed;
 			margin-left:200px;
+			overflow-y: scroll;
 		}
 		.order-category{
 			padding-left:40px;

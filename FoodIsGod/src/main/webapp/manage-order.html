@@ -36,7 +36,7 @@ textarea{
 	font-size:56px;
 }
 .dishes-detail-box{
-	height:1050px;
+	height:1120px;
 }
 </style>
 </head>
@@ -61,11 +61,11 @@ textarea{
 				<img alt="" src="images/首页.png" class="order-dishes-img">				
 				<div class="order-dishes-price">
 					<label class="order-label" id="dish-name">xxx</label>
-					<span class="dishes-price" id="dish-price">￥00.00</span>
+					￥<span class="dishes-price" id="dish-price">00.00</span>
 				</div>
 				<div class="order-dishes-price">
-					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="delete1()">删除</button>
-					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="update()">修改</button>	
+					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="update(1)">删除</button>
+					<button class="order-button" data-toggle="modal" data-target="#myModal" onclick="update(0)">修改</button>	
 				</div>										
 			</div>
 			
@@ -78,7 +78,7 @@ textarea{
 			<div class="modal-header">
 				<button type="button" class="close order-label" data-dismiss="modal" aria-hidden="true">×</button>
 				<button><img alt="" src="images/上传.png"></button>
-				<span class="form-font ">点击更改</span>
+				<span class="form-font " id="span">点击更改</span>
 			</div>			
 				<form action="manage-order.html">
 					<span class="form-font text-center">名称</span><input id="name">
@@ -93,7 +93,7 @@ textarea{
 	</div>
 	<!-- 购物车 -->
 	<div class="order-cart-box">	
-		<a class="circle-button text-center" onclick="add()">添加</a>
+		<a class="circle-button text-center" data-toggle="modal" data-target="#myModal" onclick="add()">添加</a>
 	</div>
 </body>
 
@@ -103,19 +103,19 @@ textarea{
 	<nav class="navbar-fixed-bottom" role="navigation">
     <div class="container-fluid topic"style="background:#cbd7e3">
 	    <div>
-	    	<a href="order.html" class="foot-a">
+	    	<a href="manager-order.html" class="foot-a">
 	        <img alt="点单" src="images/应用1.png" class="foot-img center-block">
 	        <span class="text-center foot-span">管理</span>
 	        </a>
 	    </div>
 	    <div>
-	    	<a href="po.html" class="foot-a">
+	    	<a href="manager-po.html" class="foot-a">
 	        <img alt="订单" src="images/订单.png" class="foot-img center-block">
 	        <span class="text-center foot-span">订单</span>
 	        </a>
 	    </div>
 	    <div>
-	    	<a href="my.html" class="foot-a">
+	    	<a href="manager-my.html" class="foot-a">
 	        <img alt="我的" src="images/我的.png" class="foot-img center-block">
 	        <span class="text-center foot-span">我的</span>
 	        </a>
@@ -124,14 +124,26 @@ textarea{
 </nav>
 </footer>
 <script>
-	function delete1(){
-		
-	}
-	function update(){
+	function update(n){
 		var name = document.getElementById("dish-name");
 		var price = document.getElementById("dish-price");
 		document.getElementById("name").value = name.innerHTML;
 		document.getElementById("price").value = price.innerHTML;
+		if(n==1){
+			$('#span').css("display",'none');
+			$('#name').attr('disabled','disabled');
+			$('#price').attr('disabled','disabled');
+			$('#remark').attr('disabled','disabled');
+		}else{
+			$('#span').css("display",'block');
+			$('#name').attr('disabled',false);
+			$('#price').attr('disabled',false);
+			$('#remark').attr('disabled',false);
+		}
+	}
+	function add(){
+		$('span').css("display",'block');
+		document.getElementById("span").innerHTML = "点击添加";
 	}
 </script>
 </html>
