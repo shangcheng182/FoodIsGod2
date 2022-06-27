@@ -97,16 +97,21 @@
 			padding-top:40px;
 			display:flex;
 		}
-		.order-dishes>img{
+		.order-dishes-img{
 			width:200px;
 			height:200px;
+			border-radius:100px;
 		}
 		.po-category-img{
 			width:200px;
 			height:200px;
+			border-radius:100px;
 		}
 		.order-label{
 			font-size:56px;
+			font-weight:600;
+			margin-top: 20px;
+    		margin-left: 20px;
 		}
 		.order-price{
 			font-size:56px;
@@ -147,13 +152,14 @@
 		}
 		.order-dishes-price{
 			display:flex;
-			flex-direction: column
+			flex-direction: column;
+			margin-left:20px;
 		}
 		.dishes-detail-box{
 			margin-top:50%;
 			margin-left:20%;
 			width:600px;
-			height:1000px;
+			height:1020px;
 			background:white;
 		}
 		.modal-center{
