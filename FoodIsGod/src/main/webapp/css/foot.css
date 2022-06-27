@@ -83,7 +83,7 @@
 			margin-top:40px;
 			float:right;
 			width:77.5%;
-			height:60%;
+			height:62%;
 			overflow:auto; 
 			position:fixed;
 			margin-left:200px;
@@ -120,7 +120,6 @@
 			font-size:35px;
 			font-weight:600;
 			color:white;
-			position: absolute;
 		}
 		.order-li{
 			height:200px;
@@ -202,6 +201,46 @@
 			margin-left:60px;
 			text-align: center;
 		}
+		.cart-box{
+			width:100%;
+			max-height:600px;
+			min-height:300px;
+			background:#f9f8f8;
+			position:fixed;
+			bottom:330px;
+			border-radius:20px;
+			animation:fadenum 1s;
+			overflow-y: scroll;
+		}
+		.cart-box-head{
+			display:flex;
+			flex-direction: row;
+			background:#CCC;
+			position:absolute;
+			width:100%;
+		}
+		.cart-box-font{
+			font-size:30px;
+			margin-top:10px;
+			margin-left:40px;
+		}
+		.cart-box-button{
+			font-size:30px;
+			margin-top:10px;
+			border:none;
+			background:#CCC;
+			margin-left:700px;
+		}
+		@keyframes fadenum{
+  			0%{transform:translateY(600px);}
+		}
+		.cart-box-num{
+			display:flex;
+			align-items: center;
+			position:absolute;
+			margin-left:80%;
+			margin-top:110px;
+		}
 		.circle-img{
 			width:70%;
 			padding-top:20px;
@@ -222,7 +261,7 @@
 			color:white;
 		}
 		.circle-add{
-			margin-bottom:120px;
+			margin-bottom:100px;
 			margin-right:20px;
 			width:50px;
 			height:50px;
@@ -250,11 +289,15 @@
 			font-size:30px;
 			margin-top:20px;
 		}
+		.po-box{
+			height:85%;
+			overflow-y: scroll;
+			position:fixed;
+		}
 		.po{
 			top:100px;
 			position:relative;
 			width:900px;
-			height:520px;
 			margin-left:40px;
 			margin-top:40px;
 			background:#f8f8f8;
@@ -275,11 +318,20 @@
 		.po-category{
 			margin-top:20px;
 			display:flex;
-			flex-direction:column;
 		}
 		.po-category-id{
-			font-size:30px;
-			margin-left:75px;
+			font-size:50px;
+			margin-left:45px;
+		}
+		.po-category-price{
+			display:flex;
+			flex-direction: column;
+			position:absolute;
+			margin-left:600px;
+		}
+		.po-category-font{
+			font-size:56px;
+			margin-top:10px;	
 		}
 		.po-price{
 			display:flex;
@@ -350,4 +402,29 @@
 			font-size:40px;
 			font-weight:500;
 			margin-left:40px;
+		}
+		.manager-order-button{
+			margin-left:700px;
+			border-radius: 24px;
+		    width: 150px;
+		    height: 80px;
+		    border: none;
+		    background: #e73388;
+		    margin-top: 15px;
+		    font-size: 35px;
+		    font-weight: 600;
+		    color: white;
+		}
+		.manager-order-dishes-price{
+			display: flex;
+    		flex-direction: column;
+    		position:absolute;
+		}
+		.manager-order-dishes-nav{
+			margin-top: 40px;
+		    overflow: auto;
+		    position: fixed;
+		    overflow-y: scroll;
+		    width:100%;
+		    height:82%;
 		}

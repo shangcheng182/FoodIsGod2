@@ -6,6 +6,7 @@
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/foot.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <title>订单管理</title>
 </head>
 <body>
@@ -16,21 +17,18 @@
         </ul>    
     </div> 
 </div>
-<div class="po">
-	<div class="po-topic">
-		<span class="po-font">编号</span>
-		<span class="po-state">状态</span>
-	</div>
-	<div class="po-category">
-		<a href="">
-			<img src="images/首页.png">
-		</a>
-		<span  class="po-category-id">xxx</span>
-	</div>
-	<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"/>
-	<div class="po-price">
-		<span class="po-state">共x件，实付￥00.00</span>
-		<button class="po-button"><span>上菜</span></button>
+<div class="po-box"  id="po">
+	<div class='po'>
+		<div class='po-topic'>
+			<span class='po-font'>编号</span>
+			<span class='po-state'>状态</span>
+		</div>
+		<div  id='po-category'></div>
+		<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'/>
+		<div class='po-price'>
+			<span class='po-state'>共x件，实付￥00.00</span>
+			<button class='po-button'><span>上菜</span></button>
+		</div>
 	</div>
 </div>
 </body>
@@ -58,4 +56,69 @@
 	</div>	            	            	
 </nav>
 </footer>
+<script>
+
+//点的菜
+var allDish = [{
+	"mealsId": 1001,
+	"sortId": 1,
+	"mealsName": "牛肉1",
+	"mealsPrice": 25,
+	"mealsRepresent": "好吃美味牛肉",
+	"mealsPicture": "我的.png",
+	"mealsSales": 50
+}, {
+	"mealsId": 1002,
+	"sortId": 2,
+	"mealsName": "果蔬2",
+	"mealsPrice": 25,
+	"mealsRepresent": "好吃美味果蔬",
+	"mealsPicture": "首页.png",
+	"mealsSales": 50
+}, {
+	"mealsId": 1003,
+	"sortId": 3,
+	"mealsName": "果蔬3",
+	"mealsPrice": 25,
+	"mealsRepresent": "好吃美味果蔬",
+	"mealsPicture": "首页.png",
+	"mealsSales": 50
+}];
+
+showPo();
+//订单
+function showPo(){
+	for(var i = 0; i < 3;i++){
+		var target = document.getElementById("po");
+		var temp = "<div class='po'>"+
+						"<div class='po-topic'>"+
+							"<span class='po-font'>编号</span>"+
+							"<span class='po-state'>状态</span>"+
+						"</div>"+
+						"<div  id='po-category'></div>"+
+						"<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'/>"+
+						"<div class='po-price'>"+
+							"<span class='po-state'>共x件，实付￥00.00</span>"+
+							"<button class='po-button'><span>上菜</span></button>"+
+						"</div>"+
+					"</div>"
+		target.innnerHTML += temp;
+	}
+}
+
+//showDish();
+//订单中的菜品
+function showDish() {
+	// 请求到的json渲染到页面上
+
+	for (var i = 0; i < allDish.length; i++) {
+		var target = document.getElementById("po-category");
+
+		var temp = "<div class='po-category'><a href=''><img src='images/"+allDish[i].mealsPicture+"'></a><span  class='po-category-id'>"+allDish[i].mealsName+
+		"</span><div class='po-category-price'><span class='po-category-font'>x1</span><span class='po-category-font'>￥00.00</span></div></div>"
+		target.innerHTML += temp;
+	}
+	
+}
+</script>
 </html>
