@@ -124,7 +124,7 @@
 			</div>
 			<div class="circle-add circlr-font"><span id="allDishNum">0</span></div>
 			<span class="order-price">￥00.00</span>
-			<a class="circle-button text-center" onclick="submitShoppingCart()">结算</a>
+			<a class="circle-button text-center" onclick="toSubmitShoppingCart()">结算</a>
 		</div>
 	</body>
 
@@ -314,22 +314,12 @@
 			}
 		}
 
+		// 设置测试userId
+		localStorage.userId=10001;
 		// 提交购物车
-		function submitShoppingCart() {
-			// ajax请求获取分类数据
-			axios.post('/shoppingCart', shoppingCarts
-
-				)
-				.then(function(response) {
-					if (response.code == 100) {
-						dishSortList = response.extend;
-					} else if (response.code == 200) {
-						console.log(response.msg);
-					}
-				})
-				.catch(function(error) {
-					console.log(error);
-				});
+		function toSubmitShoppingCart() {
+			// ajax请求
+			location.href = "confirm.html";
 		}
 
 		// 增加数量
@@ -352,11 +342,11 @@
 		// 修改模态框信息
 		function demo(mealNum) {
 			var meal = getMealById(mealNum);
-			if(meal!=""){
-				document.getElementById("dishPicture").src= "images/" + meal.mealsPicture;
-				document.getElementById("dishName").innerText=meal.mealsName;
-				document.getElementById("dishDesc").innerText=meal.mealsRepresent;
-				document.getElementById("dishPrice").innerText= "￥" + meal.mealsPrice + ".00";
+			if (meal != "") {
+				document.getElementById("dishPicture").src = "images/" + meal.mealsPicture;
+				document.getElementById("dishName").innerText = meal.mealsName;
+				document.getElementById("dishDesc").innerText = meal.mealsRepresent;
+				document.getElementById("dishPrice").innerText = "￥" + meal.mealsPrice + ".00";
 			}
 
 		}
@@ -507,6 +497,111 @@
 			} else {
 				document.getElementById("111").style.display = "none";
 			}
+		}
+
+		// 游客模式生成随机用户名并写入本地
+		function writeUserName2Storage() {
+			if (localStorage.userName) {} else {
+				localStorage.userName = random("游客_", 10);
+			}
+		}
+
+		// 游客模式userId写入本地
+		function writeUserId2Storage(userId) {
+			if (localStorage.userId) {
+				localStorage.userId = userId;
+			} else {
+				localStorage.userId = userId;
+			}
+		}
+
+		// 设置cookie
+		function setCookie(name, value, daysToLive) {
+			// 对 cookie 值进行编码以转义其中的分号、逗号和空格
+			var cookie = name + "=" + encodeURIComponent(value);
+
+			if (typeof daysToLive === "number") {
+				/* 设置 max-age 属性 */
+				cookie += "; max-age=" + (daysToLive * 24 * 60 * 60);
+			}
+			document.cookie = cookie;
+		}
+
+		// 获取cookie
+		function getCookie(name) {
+			var cookies = document.cookie;
+			var list = cookies.split("; "); // 解析出名/值对列表
+
+			for (var i = 0; i < list.length; i++) {
+				var arr = list[i].split("="); // 解析出名和值
+				if (arr[0] == name)
+					return decodeURIComponent(arr[1]); // 对cookie值解码
+			}
+			return "";
+		}
+
+		// 游客身份登录
+		function visitor2login() {
+			// ajax请求
+			// 注册游客身份
+			axios.post('/user', {
+					"userName": localStorage.userName
+				})
+				.then(function(response) {
+					if (response.code == 100) {
+						writeUserId2Storage(response.data.extend.user.userId);
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+
+		// 检查登录
+		function checkLogin() {
+			// 检查cookie
+			var loginCookie = getCookie("userId");
+			if (loginCookie == "") {
+				console.log("cookie不存在");
+				visitor2login();
+			}
+		}
+
+		// 随机生成用户名
+		function random(prefix, randomLength) {
+			// 兼容更低版本的默认值写法
+			prefix === undefined ? prefix = "游客_" : prefix;
+			randomLength === undefined ? randomLength = 8 : randomLength;
+
+			// 设置随机用户名
+			// 用户名随机词典数组
+			let nameArr = [
+				[1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+				["a", "b", "c", "d", "e", "f", "g", "h", "i", "g", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+					"v", "w", "x", "y", "z"
+				]
+			]
+			// 随机名字字符串
+			let name = prefix;
+			// 循环遍历从用户词典中随机抽出一个
+			for (var i = 0; i < randomLength; i++) {
+				// 随机生成index
+				let index = Math.floor(Math.random() * 2);
+				let zm = nameArr[index][Math.floor(Math.random() * nameArr[index].length)];
+				// 如果随机出的是英文字母
+				if (index === 1) {
+					// 则百分之50的概率变为大写
+					if (Math.floor(Math.random() * 2) === 1) {
+						zm = zm.toUpperCase();
+					}
+				}
+				// 拼接进名字变量中
+				name += zm;
+			}
+			// 将随机生成的名字返回
+			return name;
 		}
 	</script>
 </html>

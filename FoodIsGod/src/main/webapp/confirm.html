@@ -1,71 +1,113 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/confirm.css">
-<title>确认订单</title>
-</head>
-<body>
-<!-- 返回 -->
-	<div class="head navbar-fixed-top">
-		<a href="order.html">
-			<img src="images/返回.png" class="confirm-img">
-		</a>
-		<span class="confirm-head-font">确认订单</span>	
-	</div>
-<!-- 商品列表 -->
-	<div class="imformation">
-		<div class="imformation-location">
-			<span class="information-font">商品列表</span>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/confirm.css">
+		<title>确认订单</title>
+	</head>
+	<body>
+		<!-- 返回 -->
+		<div class="head navbar-fixed-top">
+			<a href="order.html">
+				<img src="images/返回.png" class="confirm-img">
+			</a>
+			<span class="confirm-head-font">确认订单</span>
 		</div>
-		<!-- 商品 -->
-		<div class="commodity">
-			<img alt="" src="images/首页.png" class="commodity-img">
-			<span class="cmmodity-font">xxx</span>
-			<div class="price">
-				<span class="information-price-font">￥00.00</span>
-				<span class="cmmodity-font-num">x1</span>
+		<!-- 商品列表 -->
+		<div class="imformation">
+			<div class="imformation-location">
+				<span class="information-font">商品列表</span>
+			</div>
+			<!-- 商品 -->
+			<div class="commodity">
+				<img alt="" src="images/首页.png" class="commodity-img">
+				<span class="cmmodity-font">xxx</span>
+				<div class="price">
+					<span class="information-price-font">￥00.00</span>
+					<span class="cmmodity-font-num">x1</span>
+				</div>
+			</div>
+			<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;" />
+			<!-- 总计 -->
+			<div class="out">
+				<span class="out-font">共x件商品，小计￥00.00</span>
 			</div>
 		</div>
-		<hr size="1" noshade="noshade" style="border:1px #cccccc dotted;"/>
-		<!-- 总计 -->
-		<div class="out">
-			<span class="out-font">共x件商品，小计￥00.00</span>
+		
+		<!-- 备注 -->
+		<div class="remark">
+			<a href="#" class="remark-a" data-toggle="modal" data-target="#remark">
+				<span class="information-price-font">备注</span>
+				<span class="out-font" id="n">对商家的要求</span>
+				<img src="images/返回2.png" class="remark-img">
+			</a>
 		</div>
-	</div>
-<!-- 备注 -->
-	<div class="remark">
-		<a href="#" class="remark-a" data-toggle="modal" data-target="#remark">
-			<span class="information-price-font">备注</span>
-			<span class="out-font" id="n">对商家的要求</span>
-			<img src="images/返回2.png" class="remark-img">
-		</a>
-	</div>
-	<!-- 弹窗 -->
-	<div class="modal fade" id="remark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">	
-		<div class="remark-box">
-			<textarea rows="10" cols="50" class="remark-content" id="content"></textarea>
-			<button class="remark-button" onclick="remark()" data-dismiss="modal">完成</button>
+		<!-- 弹窗 -->
+		<div class="modal fade" id="remark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			aria-hidden="true">
+			<div class="remark-box">
+				<textarea rows="10" cols="50" class="remark-content" id="content"></textarea>
+				<button class="remark-button" onclick="remark()" data-dismiss="modal">完成</button>
+			</div>
 		</div>
-	</div>
-<!-- 支付方式 -->
-	<div class="payment"></div>
-<!-- 支付 -->
-	<div class="foot navbar-fixed-bottom">
-		<span class="foot-font">￥00.00</span>
-		<button class="foot-button">
+		<!-- 支付方式 -->
+		<div class="payment"></div>
+		<!-- 支付 -->
+		<div class="foot navbar-fixed-bottom">
+			<span class="foot-font">￥00.00</span>
+			<button class="foot-button">
 				立即支付
-		</button>
-	</div>
-</body>
-<script>
-	function remark(){
-		var remark = document.getElementById("n");
-		var content = document.getElementById("content");
-		remark.innerHTML = content.value;
-	}
-</script>
+			</button>
+		</div>
+	</body>
+	<script>
+		// 购物车list
+		var shoppingCarts;
+	
+		function remark() {
+			var remark = document.getElementById("n");
+			var content = document.getElementById("content");
+			remark.innerHTML = content.value;
+		}
+
+		function submitShoppingCart() {
+			axios.post('/shoppingCart', {
+					params: {
+						userId: localStorage.userId
+					}
+				})
+				.then(function(response) {
+					if (response.code == 100) {
+						shoppingCarts = response.extend.shoppingCarts;
+						loadShoppingCart();
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+		
+		function loadShoppingCart(){
+			for (var i = 0; i < shoppingCarts.length; i++) {
+				shoppingCarts[i]
+				
+				var target = document.getElementById("dish_category" + allDIsh[i].sortId);
+				
+				var temp = "<div class='order-dishes'><img alt='' src='images/" + allDIsh[i].mealsPicture +
+					"' class='order-dishes-img'>" +
+					"<div class='order-dishes-price'><label class='order-label'>" + allDIsh[i].mealsName + "</label>" +
+					"<span class='dishes-price'> ￥" + allDIsh[i].mealsPrice + ".00</span>" +
+					"</div><button class='order-button' data-toggle='modal' data-target='#myModal' onclick='demo(" +
+					allDIsh[i].mealsId + ")'>选规格</button></div>";
+				
+				target.innerHTML += temp;
+			}
+			
+		}
+	</script>
 </html>
