@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/foot.css">
 <title>订单</title>
 </head>
-<body>
+<body style="background:white">
 <div class="navbar navbar-default navbar-fixed-top" role="navigation"> 
    	 <div class="container-fluid"> 
         <ul class="nav navbar-nav po-nav"> 
@@ -64,4 +64,26 @@
 	</div>	            	            	
 </nav>
 </footer>
+<script>
+	
+	function loadMyOrders(){
+		// ajax请求获取分类数据
+		axios.post('/order/getByUserId', {
+			
+		}
+		
+			)
+			.then(function(response) {
+				if (response.code == 100) {
+					dishSortList = response.extend;
+				} else if (response.code == 200) {
+					console.log(response.msg);
+				}
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+	}
+</script>
+
 </html>
