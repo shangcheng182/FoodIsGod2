@@ -33,6 +33,7 @@
 			display:flex;
 			flex-direction: column;
 		}
+	
 		.home-font{
 			font-size:56px;
 			font-style: oblique;
@@ -95,6 +96,14 @@
 		.order-dishes{
 			padding-top:40px;
 			display:flex;
+		}
+		.order-dishes>img{
+			width:200px;
+			height:200px;
+		}
+		.po-category-img{
+			width:200px;
+			height:200px;
 		}
 		.order-label{
 			font-size:56px;

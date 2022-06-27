@@ -17,19 +17,8 @@
         </ul>    
     </div> 
 </div>
+<!-- 订单 -->
 <div class="po-box"  id="po">
-	<div class='po'>
-		<div class='po-topic'>
-			<span class='po-font'>编号</span>
-			<span class='po-state'>状态</span>
-		</div>
-		<div  id='po-category'></div>
-		<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'/>
-		<div class='po-price'>
-			<span class='po-state'>共x件，实付￥00.00</span>
-			<button class='po-button'><span>上菜</span></button>
-		</div>
-	</div>
 </div>
 </body>
 <footer>
@@ -95,30 +84,30 @@ function showPo(){
 							"<span class='po-font'>编号</span>"+
 							"<span class='po-state'>状态</span>"+
 						"</div>"+
-						"<div  id='po-category'></div>"+
+						"<div  id='po-category"+i+"'></div>"+
 						"<hr size='1' noshade='noshade' style='border:1px #cccccc dotted;'/>"+
 						"<div class='po-price'>"+
 							"<span class='po-state'>共x件，实付￥00.00</span>"+
 							"<button class='po-button'><span>上菜</span></button>"+
 						"</div>"+
 					"</div>"
-		target.innnerHTML += temp;
+		target.innerHTML += temp;
 	}
 }
 
-//showDish();
+showDish();
 //订单中的菜品
 function showDish() {
 	// 请求到的json渲染到页面上
 
-	for (var i = 0; i < allDish.length; i++) {
-		var target = document.getElementById("po-category");
-
-		var temp = "<div class='po-category'><a href=''><img src='images/"+allDish[i].mealsPicture+"'></a><span  class='po-category-id'>"+allDish[i].mealsName+
-		"</span><div class='po-category-price'><span class='po-category-font'>x1</span><span class='po-category-font'>￥00.00</span></div></div>"
-		target.innerHTML += temp;
+	for(var j = 0;j<3;j++){
+		var target = document.getElementById("po-category"+j);
+		for (var i = 0; i < allDish.length; i++) {
+			var temp = "<div class='po-category'><a href=''><img src='images/"+allDish[i].mealsPicture+"' class='po-category-img'></a><span  class='po-category-id'>"+allDish[i].mealsName+
+			"</span><div class='po-category-price'><span class='po-category-font'>x1</span><span class='po-category-font'>￥00.00</span></div></div>"
+			target.innerHTML += temp;
+		}
 	}
-	
 }
 </script>
 </html>

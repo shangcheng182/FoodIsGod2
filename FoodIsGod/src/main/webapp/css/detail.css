@@ -55,16 +55,18 @@
 	margin-left:40px;
 }
 .commodity-img{
-	width:20%;
+	width:200px;
+	height:200px;
 }
 .cmmodity-font{
 	margin-left:20px;
 	font-size:40px;
 }
 .price{
+	position:absolute;
 	display:flex;
 	flex-direction: column;
-	margin-left:400px;
+	margin-left:600px;
 	margin-top:10px;
 }
 .information-price-font{
@@ -110,6 +112,10 @@
 	margin-top:40px;
 	background:#f8f8f8;
 	border-radius:20px;
+}
+.body-box{
+	height:1900px;
+	overflow-y: scroll;
 }
 .body{
 	width:900px;
