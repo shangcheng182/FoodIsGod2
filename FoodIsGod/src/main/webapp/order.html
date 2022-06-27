@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/foot.css">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<title>点单</title>
-<style type="text/css">
-	.order-dishes>img{
-		width: 200px;
-		height: 200px;
-	}
-</style>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/foot.css">
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<title>点单</title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
 		<div class="body">
 			<img alt="" src="images/图片背景.png">
 		</div>
@@ -39,14 +34,13 @@
 		<!-- 榜单 -->
 		<div class="order-dishes-nav" data-spy="scroll" data-target="#navbar-example" id="dish_category_content">
 		</div>
-			
 		<!-- 模态框 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 			aria-hidden="true">
 			<div class="dishes-detail-box">
 				<div class="modal-header">
 					<button type="button" class="close order-label" data-dismiss="modal" aria-hidden="true">X</button>
-					<img alt="" src="images/首页.png">
+					<img alt="" id="dishPicture" width="200px" height="200px" src="images/首页.png">
 					<h4 class="order-label" id="dishName">xxx</h4>
 				</div>
 				<div class="modal-center">
@@ -64,7 +58,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- 物品栏 -->
 		<div class="cart-box" id="111" style="display:none">
 			<div class="cart-box-head">
@@ -120,11 +114,11 @@
 				</div>
 			</div>
 		</div>
-	
+
 		<!-- 购物车 -->
 		<div class="order-cart-box">
 			<div class="cart-circle">
-				<a  class="circle-a" onclick="test()">
+				<a class="circle-a" onclick="test()">
 					<img alt="" src="images/购物车.png" class="circle-img center-block">
 				</a>
 			</div>
@@ -166,5 +160,353 @@
 		</nav>
 	</footer>
 
+	<script>
+		//全局变量
+		//json数组
+		//样例数据
+		//菜品分类列表
+		var dishSortList = [{
+			"sortId": 1,
+			"sortName": "热销"
+		}, {
+			"sortId": 2,
+			"sortName": "爆款"
+		}, {
+			"sortId": 3,
+			"sortName": "其他"
+		}];
+		// 所有菜品列表
+		var allDIsh = [{
+			"mealsId": 1001,
+			"sortId": 1,
+			"mealsName": "牛肉1",
+			"mealsPrice": 1,
+			"mealsRepresent": "好吃美味牛肉",
+			"mealsPicture": "麻婆豆腐.jpg",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1002,
+			"sortId": 2,
+			"mealsName": "果蔬2",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "商品.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1003,
+			"sortId": 3,
+			"mealsName": "果蔬3",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "商品.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1004,
+			"sortId": 1,
+			"mealsName": "果蔬1",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "商品.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1005,
+			"sortId": 2,
+			"mealsName": "果蔬2",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "商品.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1006,
+			"sortId": 3,
+			"mealsName": "果蔬3",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "商品.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1007,
+			"sortId": 3,
+			"mealsName": "麻婆豆腐3",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "麻婆豆腐.jpg",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1008,
+			"sortId": 3,
+			"mealsName": "回锅肉3",
+			"mealsPrice": 45,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "商品.png",
+			"mealsSales": 50
+		}, {
+			"mealsId": 1009,
+			"sortId": 3,
+			"mealsName": "水煮牛肉3",
+			"mealsPrice": 25,
+			"mealsRepresent": "好吃美味果蔬",
+			"mealsPicture": "商品.png",
+			"mealsSales": 50
+		}];
+		// 购物车
+		var shoppingCarts = [];
+		// 购物车
+		var shoppingCarts = [];
+		// function createDishSort(sortId,sortName) {
+		//     var o = new Object();
+		//     o.sortId = sortId;
+		//     o.sortName = sortName;
+		//     return o;
+		// }
+
+
+		var spc1 = new shoppingCart(123, 1001, 2);
+		var spc2 = new shoppingCart(123, 1002, 1);
+		var spc3 = new shoppingCart(123, 1003, 2);
+		shoppingCarts.push(spc1);
+		shoppingCarts.push(spc2);
+		shoppingCarts.push(spc3);
+		// console.log(shoppingCarts);
+
+		// 构造函数
+		// 类别
+		function dishSort(sortId, sortName) {
+			this.sortId = sortId;
+			this.sortName = sortName;
+		}
+		// 构造函数
+		// 购物车
+		function shoppingCart(userId, mealsId, mealsNum) {
+			this.userId = userId;
+			this.mealsId = mealsId;
+			this.mealsNum = mealsNum;
+		}
+		// 构造函数
+		// 菜品
+		function dish(mealsId, sortId, mealsName,
+			mealsPrice, mealsRepresent, mealsPicture, mealsSales) {
+			this.mealsId = mealsId;
+			this.sortId = sortId;
+			this.mealsName = mealsName;
+			this.mealsPrice = mealsPrice;
+			this.mealsRepresent = mealsRepresent;
+			this.mealsPicture = mealsPicture;
+			this.mealsSales = mealsSales;
+		}
+
+		var spc1 = new shoppingCart(123, 1001, 2);
+		var spc2 = new shoppingCart(123, 1002, 1);
+		var spc3 = new shoppingCart(123, 1003, 2);
+		shoppingCarts.push(spc1);
+		shoppingCarts.push(spc2);
+		shoppingCarts.push(spc3);
+		console.log(shoppingCarts);
+
+		// 减少数量
+		function dec() {
+			var num = document.getElementById("num");
+			b = parseInt(num.innerHTML);
+			if (b == 1) {
+				num.innerHTML = 1;
+			} else {
+				num.innerHTML = b - 1;
+			}
+		}
+
+		// 提交购物车
+		function submitShoppingCart() {
+			// ajax请求获取分类数据
 			axios.post('/shoppingCart', shoppingCarts
+
+				)
+				.then(function(response) {
+					if (response.code == 100) {
+						dishSortList = response.extend;
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+
+		// 增加数量
+		function add() {
+			var a = document.getElementById("num");
+			b = parseInt(a.innerHTML) + 1;
+			a.innerHTML = b;
+		}
+
+		// 加入购物车
+		function join() {
+			var num = document.getElementById("num");
+			b = parseInt(num.innerHTML);
+			var n = document.getElementById("allDishNum");
+			a = parseInt(n.innerHTML);
+			n.innerHTML = a + b;
+			num.innerHTML = 1;
+		}
+
+		// 修改模态框信息
+		function demo(mealNum) {
+			var meal = getMealById(mealNum);
+			if(meal!=""){
+				document.getElementById("dishPicture").src= "images/" + meal.mealsPicture;
+				document.getElementById("dishName").innerText=meal.mealsName;
+				document.getElementById("dishDesc").innerText=meal.mealsRepresent;
+				document.getElementById("dishPrice").innerText= "￥" + meal.mealsPrice + ".00";
+			}
+
+		}
+
+		function getMealById(mealNum) {
+			for (var i = 0; i < allDIsh.length; i++) {
+				if (allDIsh[i].mealsId == mealNum) {
+					return allDIsh[i];
+				}
+			}
+			return "";
+		}
+
+		// 桌号相关操作开始 ////////////////
+
+		//获取URL里面的名为name的参数
+		function getQueryString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return unescape(r[2]);
+			}
+			//URL里无此参数，返回空
+			return null;
+		}
+
+		//tbm桌号
+		var tbm = getQueryString("tableNumer");
+		if (tbm != null) {
+			writeTableNumber(tbm);
+			writeStorage(tbm);
+		} else { // URL里没有桌号，去浏览器缓存读取
+			writeTableNumber(readStorage());
+		}
+
+		//桌号写入浏览器缓存
+		function writeStorage(tbm) {
+			if (typeof(Storage) !== "undefined") {
+				if (tbm == "") {
+					sessionStorage.tableNumer = "未知";
+				} else {
+					sessionStorage.tableNumer = tbm;
+				}
+			}
+		}
+
+		//读浏览器缓存中的桌号
+		function readStorage() {
+			if (typeof(Storage) !== "undefined") {
+				if (sessionStorage.tableNumer) {
+					return sessionStorage.tableNumer;
+				}
+				return "未知";
+			}
+		}
+
+		//打印桌号
+		function writeTableNumber(tbm) {
+			document.getElementById("table_Numer").innerText = tbm;
+		}
+		// 桌号相关操作结束 /////////////////
+
+
+		// 插入分类信息
+		function insertLeftNav() {
+			var target = document.getElementById("left_navbar");
+			var dish_category_content = document.getElementById("dish_category_content");
+			// 请求到的json渲染到页面上
+
+			for (var i = 0; i < dishSortList.length; i++) {
+				var temp = "<li class='order-li'>" +
+					"<a href='#hot" + dishSortList[i].sortId + "' class='order-li-a'>" +
+					"<span class='text-center order-a-font'>" + dishSortList[i].sortName + "</span></a></li>";
+
+				target.innerHTML += temp;
+
+				var temp2 = "<div class='order-category' id='dish_category" + dishSortList[i].sortId + "'>" +
+					"<span class='order-font' id='hot" + dishSortList[i].sortId + "'>" + dishSortList[i].sortName +
+					"</span></div>";
+
+				dish_category_content.innerHTML += temp2;
+			}
+		}
+
+		insertLeftNav();
+
+		// 加载菜品类别
+		function loadLeftNav() {
+			// ajax请求获取分类数据
+			axios.post('/meals', {
+					"sort": 1
+				})
+				.then(function(response) {
+					if (response.code == 100) {
+						dishSortList = response.data.extend;
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+
+		loadLeftNav();
+		loadDish();
+		// 加载菜品
+		function loadDish() {
+			// ajax请求获取菜品数据
+			axios.post('/sort', {
+					"mealsId": 1
+				})
+				.then(function(response) {
+					if (response.code == 100) {
+						allDIsh = response.data.extend;
+					} else if (response.code == 200) {
+						console.log(response.msg);
+					}
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		}
+		insertDish();
+		// 插入菜品信息
+		function insertDish() {
+			// 请求到的json渲染到页面上
+
+			for (var i = 0; i < allDIsh.length; i++) {
+				var target = document.getElementById("dish_category" + allDIsh[i].sortId);
+
+				var temp = "<div class='order-dishes'><img alt='' src='images/" + allDIsh[i].mealsPicture +
+					"' class='order-dishes-img'>" +
+					"<div class='order-dishes-price'><label class='order-label'>" + allDIsh[i].mealsName + "</label>" +
+					"<span class='dishes-price'> ￥" + allDIsh[i].mealsPrice + ".00</span>" +
+					"</div><button class='order-button' data-toggle='modal' data-target='#myModal' onclick='demo(" +
+					allDIsh[i].mealsId + ")'>选规格</button></div>";
+
+				target.innerHTML += temp;
+			}
+
+		}
+		//购物车物品栏
+		function test() {
+			var display = document.getElementById("111").style.display;
+			if (display == "none") {
+				document.getElementById("111").style.display = "block";
+			} else {
+				document.getElementById("111").style.display = "none";
+			}
+		}
+	</script>
 </html>

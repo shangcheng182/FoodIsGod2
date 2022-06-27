@@ -96,6 +96,10 @@
 			padding-top:40px;
 			display:flex;
 		}
+		.order-dishes>img{
+				width: 200px;
+				height: 200px;
+			}
 		.order-label{
 			font-size:56px;
 		}
@@ -120,6 +124,7 @@
 			font-size:35px;
 			font-weight:600;
 			color:white;
+			position:absolute;
 		}
 		.order-li{
 			height:200px;
